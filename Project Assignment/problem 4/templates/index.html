@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Recommendation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Content Recommendation System</h1>
+    <form method="POST">
+        <h2>Select your preferences:</h2>
+        {% for tag in tags %}
+        <label>
+            <input type="checkbox" name="preferences" value="{{ tag }}"> {{ tag }}
+        </label><br>
+        {% endfor %}
+        <button type="submit">Get Recommendations</button>
+    </form>
+
+    {% if recommendations %}
+    <h2>Recommended Content:</h2>
+    <ul>
+        {% for item in recommendations %}
+        <li>{{ item.title }} (Tags: {{ item.tags|join(", ") }})</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>
